@@ -40,16 +40,17 @@ router.post("/userRegister",async (req,res)=>{
 /////////////////////////////////////////////////////////// user register post route ////////////////////////////////////////////////////////////////////////////////////
 
 router.post("/employeeRegister",async (req,res)=>{
-    const { name , username ,employeeId ,designation,complaintSpecialisation ,language ,workplace ,mobileNo , password , cpassword} = req.body;
+    const { name , username ,employeeId ,designation,complaintSpecialisation ,language ,bankName ,workplace ,mobileNo , password , cpassword} = req.body;
+    console.log(req.body)
     try{
-        if(!name || !username  || !employeeId || !workplace || !mobileNo || !password || !cpassword || !designation || !complaintSpecialisation || !language ){
+        if(!name || !username  || !employeeId || !workplace || !mobileNo || !password || !cpassword || !designation || !complaintSpecialisation || !language || !bankName ){
             res.status(422).json({error : "fill all the details"});
         }
         else if(password !== cpassword){
             res.status(422).json({json : "password and confirm password are not matching."})
         }
         else{
-            Employee.register(new Employee({name:name ,employeeId : employeeId ,workplace : workplace ,mobileNo : mobileNo,username : username,designation : designation,complaintSpecialisation:complaintSpecialisation,language:language}), password,function(err,user){
+            Employee.register(new Employee({name:name ,employeeId : employeeId ,workplace : workplace ,mobileNo : mobileNo,username : username,designation : designation,complaintSpecialisation:complaintSpecialisation,language:language,bankName:bankName}), password,function(err,user){
                 if(err){
                     return res.send(err);            
                 }

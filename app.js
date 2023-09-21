@@ -2,12 +2,15 @@ require('dotenv').config();
 const express = require("express");
 const session = require('express-session');
 const passport = require('passport');
+const ejs = require('ejs');
+
 
 const app = express();
 
+app.set('view engine', 'ejs');
 //allowing website to read data from frontend
 app.use(express.urlencoded());
-
+app.use(express.static('public'));
 app.use(session({
     secret : "ourLittleSecret",
     resave : false,
